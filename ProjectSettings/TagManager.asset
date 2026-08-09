@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - Trap
+  - WayOut
+  - MapLimit
+  - ItemHeal
+  - Bush
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Hidden
+  - Bush
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Ground
+    uniqueID: 26547621
+    locked: 0
+  - name: Grass
+    uniqueID: 3071135457
+    locked: 0
+  - name: Canon
+    uniqueID: 1773938407
+    locked: 0
+  - name: MapLimit
+    uniqueID: 4238494985
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2341295907
+    locked: 0
+  - name: Trap
+    uniqueID: 141418557
+    locked: 0
+  - name: Tree
+    uniqueID: 1065186015
+    locked: 0
+  - name: HpBar
+    uniqueID: 2837530073
+    locked: 0
+  - name: UI
+    uniqueID: 1560455835
+    locked: 0
+  m_RenderingLayers:
+  - Default
