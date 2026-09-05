@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private MainInputAction controls;
-    private Vector2 moveInput;
+    [HideInInspector] public Vector2 moveInput;
     private Animator animator;
     private List<string> inputStack = new List<string>();
     private string currentDirection = "";
@@ -23,10 +23,11 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting = false;
     private bool isDead = false;
     private GameManager gameManager;
-    [SerializeField] private AudioManager audioManager;
+
+    private AudioManager audioManager;
     void Awake()
     {
-        audioManager = GetComponent<AudioManager>();
+        audioManager = FindAnyObjectByType<AudioManager>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = FindAnyObjectByType<GameManager>();
         animator = GetComponent<Animator>();
@@ -235,6 +236,10 @@ public class PlayerController : MonoBehaviour
         else if (collision.CompareTag("WayOut"))
         {
             gameManager.GameWin();
+        }
+        else if (collision.CompareTag("DeadZone"))
+        {
+            gameManager.GameOver();
         }
     }
 }

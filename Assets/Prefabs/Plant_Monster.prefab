@@ -202,4 +202,5 @@ MonoBehaviour:
   player: {fileID: 0}
   attackRange: 1.25
   attackCooldown: 3
+  enemyHeal: 20
   waitTime: 1.5

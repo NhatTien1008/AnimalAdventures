@@ -105,4 +105,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Chapter1");
         Time.timeScale = 1;
     }
+    public void loadSceneChap2()
+    {
+        SceneManager.LoadScene("Chapter2");
+        Time.timeScale = 1;
+    }
+    public void loadSceneChap3()
+    {
+        SceneManager.LoadScene("Chapter3");
+        Time.timeScale = 1;
+    }
+    public void loadSceneChap4()
+    {
+        SceneManager.LoadScene("Chapter4");
+        Time.timeScale = 1;
+    }
 }

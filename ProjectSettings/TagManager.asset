@@ -10,6 +10,8 @@ TagManager:
   - MapLimit
   - ItemHeal
   - Bush
+  - Breakable
+  - DeadZone
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - UI
   - Hidden
   - Bush
-  - 
-  - 
+  - Fly
+  - Hole
   - 
   - 
   - 

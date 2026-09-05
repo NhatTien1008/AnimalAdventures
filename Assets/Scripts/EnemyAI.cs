@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public float attackRange = 1.25f;
     public float attackCooldown = 3f;
+    public float enemyHeal = 10f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -127,7 +128,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (player.gameObject.layer == LayerMask.NameToLayer("Hidden"))
         {
-            return false; // Nếu đang ẩn nấp, Enemy coi như không nhìn thấy
+            return false;
         }
 
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
@@ -168,6 +169,20 @@ public class EnemyAI : MonoBehaviour
         if (distance <= attackRange && IsPlayerInSight())
         {
             player.GetComponent<PlayerController>().takeDamage(10);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        enemyHeal -= damage;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("isHurt");
+        }
+        if (enemyHeal <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
