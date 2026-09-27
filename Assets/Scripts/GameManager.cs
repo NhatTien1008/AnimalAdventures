@@ -7,77 +7,75 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameWinUI;
     [SerializeField] private GameObject gamePauseUI;
     [SerializeField] private GameObject playGuideUI;
-    [SerializeField] private GameObject PauseBtn;
-    [SerializeField] private GameObject GuideBtn;
+    [SerializeField] private GameObject pauseBtn;
+    [SerializeField] private GameObject guideBtn;
     private bool isGameOver = false;
     private bool isGameWin = false;
-    private bool isGamePause = false;
-    private bool isTouchGuide = false;
+
+    //UI Control
+    public GameObject BlockChain_Map2;
+    public GameObject BlockChain_Map3;
+    private bool Map1_Completed = false;
+    private bool Map2_Completed = false;
+    private bool Map3_Completed = false;
     void Start()
     {
+        Map1_Completed = PlayerPrefs.GetInt("Map1_Completed", 0) == 1;
+        Map2_Completed = PlayerPrefs.GetInt("Map2_Completed", 0) == 1;
+        Map3_Completed = PlayerPrefs.GetInt("Map3_Completed", 0) == 1;
 
-        gameOverUI.SetActive(false);
-        gameWinUI.SetActive(false);
-        gamePauseUI.SetActive(false);
-        playGuideUI.SetActive(false);
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (gameWinUI != null) gameWinUI.SetActive(false);
+        if (gamePauseUI != null) gamePauseUI.SetActive(false);
+        if (playGuideUI != null) playGuideUI.SetActive(false);
+
+        UpdateChainUI();
     }
-
-    void Update()
+    private void UpdateChainUI()
     {
-        if (isGameOver || isGameWin) return;
-        if (isGamePause)
-        {
-            GamePause();
-        }
-        else if (isTouchGuide)
-        {
-            PlayGuide();
-        }
-        else
-        {
-            Continue();
-        }
+        if (BlockChain_Map2 != null && Map1_Completed)
+            BlockChain_Map2.SetActive(false);
+            
+        if (BlockChain_Map3 != null && Map2_Completed)
+            BlockChain_Map3.SetActive(false);
     }
     public void GamePause()
     {
-        isGamePause = true;
         Time.timeScale = 0;
-        PauseBtn.SetActive(false);
-        GuideBtn.SetActive(false);
-        gamePauseUI.SetActive(true);
+        pauseBtn?.SetActive(false);
+        guideBtn?.SetActive(false);
+        gamePauseUI?.SetActive(true);
     }
     public void Continue()
     {
-        isGamePause = false;
-        isTouchGuide = false;
         Time.timeScale = 1;
-        PauseBtn.SetActive(true);
-        GuideBtn.SetActive(true);
-        playGuideUI.SetActive(false);
-        gamePauseUI.SetActive(false);
+        pauseBtn?.SetActive(true);
+        guideBtn?.SetActive(true);
+        playGuideUI?.SetActive(false);
+        gamePauseUI?.SetActive(false);
     }
     public void PlayGuide()
     {
-        isTouchGuide = true;
         Time.timeScale = 0;
-        PauseBtn.SetActive(false);
-        GuideBtn.SetActive(false);
-        playGuideUI.SetActive(true);
+        pauseBtn?.SetActive(false);
+        guideBtn?.SetActive(false);
+        playGuideUI?.SetActive(true);
     }
     public void GameOver()
     {
         isGameOver = true;
-        gameOverUI.SetActive(true);
+        gameOverUI?.SetActive(true);
     }
     public void GameWin()
     {
         isGameWin = true;
         Time.timeScale = 0;
-        gameWinUI.SetActive(true);
+        gameWinUI?.SetActive(true);
     }
     public void RestartGame()
     {
         isGameOver = false;
+        isGameWin = false;
         Time.timeScale = 1;
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentScene);
@@ -92,32 +90,70 @@ public class GameManager : MonoBehaviour
     }
     public void MenuUp()
     {
-        SceneManager.LoadScene("ChapterSelect");
         Time.timeScale = 1;
+        SceneManager.LoadScene("ChapterSelect");
     }
     public void BackToMainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
-        Time.timeScale = 1;
     }
-    public void loadSceneChap1()
+    public void LoadSceneChap1()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Chapter1");
-        Time.timeScale = 1;
     }
-    public void loadSceneChap2()
+    public void LoadSceneChap2()
     {
-        SceneManager.LoadScene("Chapter2");
-        Time.timeScale = 1;
+        if (Map1_Completed)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Chapter2");
+        }
     }
-    public void loadSceneChap3()
+    public void LoadSceneChap3()
     {
-        SceneManager.LoadScene("Chapter3");
-        Time.timeScale = 1;
+        if (Map2_Completed)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Chapter3");
+        }
     }
-    public void loadSceneChap4()
+    public void LoadSceneChap4()
     {
-        SceneManager.LoadScene("Chapter4");
-        Time.timeScale = 1;
+        if(Map2_Completed && Map3_Completed)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Chapter4");
+        }
+    }
+    public void CompleteMap_1()
+    {
+        Map1_Completed = true;
+        PlayerPrefs.SetInt("Map1_Completed", 1);
+        PlayerPrefs.Save();
+        UpdateChainUI();
+    }
+    public void CompleteMap_2()
+    {
+        Map2_Completed = true;
+        PlayerPrefs.SetInt("Map2_Completed", 1);
+        PlayerPrefs.Save();
+        UpdateChainUI();
+    }
+    public void CompleteMap_3()
+    {
+        Map3_Completed = true;
+        PlayerPrefs.SetInt("Map3_Completed", 1);
+        PlayerPrefs.Save();
+        UpdateChainUI();
+    }
+    public void ResetData()
+    {
+        PlayerPrefs.DeleteAll();
+        Map1_Completed = false;
+        Map2_Completed = false;
+        Map3_Completed = false;
+        UpdateChainUI();
     }
 }

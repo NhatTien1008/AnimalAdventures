@@ -200,7 +200,7 @@ MonoBehaviour:
   patrolDistance: 3
   patrolDirection: 1
   player: {fileID: 0}
-  attackRange: 1.25
-  attackCooldown: 3
+  attackRange: 1.75
+  attackCooldown: 4
   enemyHeal: 20
   waitTime: 1.5

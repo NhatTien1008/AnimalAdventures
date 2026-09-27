@@ -25,8 +25,11 @@ public class GrouseSkill : MonoBehaviour
     private int originalLayer;
     private int flyLayer;
 
+    private AudioManager audioManager;
+
     void Awake()
     {
+        audioManager = FindAnyObjectByType<AudioManager>();
         controls = new MainInputAction();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalLayer = gameObject.layer;
@@ -129,6 +132,7 @@ public class GrouseSkill : MonoBehaviour
         isFly = true;
         gameObject.layer = flyLayer;
         SetAlpha(0.5f);
+        audioManager.GrouseSkillFly();
     }
 
     private void StopFlying()

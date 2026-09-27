@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraMap1 : MonoBehaviour
 {
     [Header("Target Settings")]
     public Transform player;
@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
         float px = player.position.x;
         float py = player.position.y;
 
- 
+
         if (py >= 64.3f && Mathf.Abs(px) <= 29f)
         {
             targetPosition = new Vector3(px, 66.5f + yOffset, defaultZ);
@@ -44,7 +44,7 @@ public class CameraFollow : MonoBehaviour
             targetPosition = new Vector3(px, 35f + yOffset, defaultZ);
         }
 
-        else if (px >= 3.5 && px < 15.2 && py >= 32.27f && py <56f)
+        else if (px >= 3.5 && px < 15.2 && py >= 32.27f && py < 56f)
         {
             targetPosition = new Vector3(9.5f, py + yOffset, defaultZ);
         }

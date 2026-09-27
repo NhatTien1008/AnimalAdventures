@@ -126,7 +126,7 @@ public class EnemyAI : MonoBehaviour
     }
     private bool IsPlayerInSight()
     {
-        if (player.gameObject.layer == LayerMask.NameToLayer("Hidden"))
+        if (player.gameObject.layer == LayerMask.NameToLayer("Hidden") || player.gameObject.layer == LayerMask.NameToLayer("Fly"))
         {
             return false;
         }
@@ -168,7 +168,14 @@ public class EnemyAI : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
         if (distance <= attackRange && IsPlayerInSight())
         {
-            player.GetComponent<PlayerController>().takeDamage(10);
+            if (player.TryGetComponent<PlayerController>(out var playerController))
+            {
+                playerController.takeDamage(10);
+            }
+            else if (player.TryGetComponent<GrouseController>(out var grouseController))
+            {
+                grouseController.takeDamage(10);
+            }
         }
     }
 

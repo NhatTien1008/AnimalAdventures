@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2880310113978888844}
   - component: {fileID: 1436737090885562327}
   - component: {fileID: 4725040753439462507}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CannonBall
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7804278689363265662, guid: 7cefe191a2494634aa2a01f035a287b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

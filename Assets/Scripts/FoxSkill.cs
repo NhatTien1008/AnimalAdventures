@@ -11,9 +11,11 @@ public class FoxSkill : MonoBehaviour
 
     private int originalLayer;
     private int hiddenLayer;
+    private AudioManager audioManager;
 
     void Awake()
     {
+        audioManager = FindAnyObjectByType<AudioManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         controls = new MainInputAction();
         originalLayer = gameObject.layer;
@@ -40,6 +42,7 @@ public class FoxSkill : MonoBehaviour
         {
             gameObject.layer = hiddenLayer;
             SetAlpha(0.5f);
+            audioManager.FoxSkillHide();
         }
     }
 

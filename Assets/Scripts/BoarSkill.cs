@@ -25,12 +25,14 @@ public class BoarSkill : MonoBehaviour
     private Vector2 chargeDirection;
     private Coroutine chargeCoroutine;
 
+    private AudioManager audioManager;
     void Awake()
     {
         if (controls == null) controls = new MainInputAction();
 
         player = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
+        audioManager = FindAnyObjectByType<AudioManager>();
 
         cooldownBar.SetActive(false);
     }
@@ -158,6 +160,7 @@ public class BoarSkill : MonoBehaviour
         if (collision.gameObject.CompareTag("Breakable"))
         {
             Destroy(collision.gameObject);
+            audioManager.BoarSkillBreak();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

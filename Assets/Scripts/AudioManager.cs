@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip eatClip;
     [SerializeField] private AudioClip takeDamageClip;
     [SerializeField] private AudioClip takeItemClip;
+    [SerializeField] private AudioClip BreakClip;
+    [SerializeField] private AudioClip WingFlapClip;
+    [SerializeField] private AudioClip BushRushClip;
 
     [Header("UI Controls (Optional)")]
     [SerializeField] private Slider SFX;
@@ -97,5 +100,20 @@ public class AudioManager : MonoBehaviour
     {
         if (MusicAudioSource == null) return;
         MusicAudioSource.Play();
+    }
+    public void BoarSkillBreak()
+    {
+        if (!SFXIsEnable) return;
+        SFXAudioSource.PlayOneShot(BreakClip);
+    }
+    public void GrouseSkillFly()
+    {
+        if (!SFXIsEnable) return;
+        SFXAudioSource.PlayOneShot(WingFlapClip);
+    }
+    public void FoxSkillHide()
+    {
+        if (!SFXIsEnable) return;
+        SFXAudioSource.PlayOneShot(BushRushClip);
     }
 }

@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
         if (delayTimer > 0)
         {
-            delayTimer -= Time.fixedDeltaTime;
+            delayTimer -= Time.deltaTime;
             rb.linearVelocity = Vector2.zero;
             UpdateAnimation(currentDirection, isDelaying: true);
             return;
@@ -200,20 +200,33 @@ public class PlayerController : MonoBehaviour
 
     private void die()
     {
-        if (isDead) return; 
-        isDead = true;      
-
-        animator.SetTrigger("isDeath");
+        if (isDead) return;
+        isDead = true;
 
         rb.linearVelocity = Vector2.zero;
         rb.simulated = false;
 
-        this.enabled = false;
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", false);
+
+        animator.SetTrigger("isDeath");
+
+        StartCoroutine(DieRoutine());
+    }
+    private IEnumerator DieRoutine()
+    {
+        yield return null;
+
+        float deathAnimLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        yield return new WaitForSeconds(deathAnimLength);
 
         if (gameManager != null)
         {
             gameManager.GameOver();
         }
+
+        this.enabled = false;
     }
 
     private void heal(float healItem)
@@ -233,12 +246,24 @@ public class PlayerController : MonoBehaviour
         {
             takeDamage(5);
         }
-        else if (collision.CompareTag("WayOut"))
+        else if (collision.CompareTag("WayOutMap1"))
         {
+            gameManager.CompleteMap_1();
+            gameManager.GameWin();
+        }
+        else if (collision.CompareTag("WayOutMap2"))
+        {
+            gameManager.CompleteMap_2();
+            gameManager.GameWin();
+        }
+        else if (collision.CompareTag("WayOutMap3"))
+        {
+            gameManager.CompleteMap_3();
             gameManager.GameWin();
         }
         else if (collision.CompareTag("DeadZone"))
         {
+            die();
             gameManager.GameOver();
         }
     }
